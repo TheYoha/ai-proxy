@@ -1,4 +1,3 @@
-Copy
 fastapi==0.95.2
 httpx==0.24.1
 uvicorn==0.22.0
