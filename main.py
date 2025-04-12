@@ -20,6 +20,8 @@ async def log_call(method, path, model, status_code):
         "status_code": status_code,
         "timestamp": datetime.utcnow().isoformat()
     }).execute()
+    print("Insert response:", res)
+
 
 @app.api_route("/proxy/openai/{path:path}", methods=["POST", "GET", "PUT", "DELETE"])
 async def proxy_openai(request: Request, path: str):
