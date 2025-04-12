@@ -39,3 +39,22 @@ async def proxy_openai(request: Request, path: str):
 @app.get("/")
 async def health_check():
     return {"status": "OK", "message": "OpenAI Proxy is running"}
+
+
+from supabase import create_client
+import os
+
+# Supabase setup (add to top of file)
+SUPABASE_URL = "https://utcuhckkcgdzwcktvgva.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0Y3VoY2trY2dkendja3R2Z3ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ0Njk2ODMsImV4cCI6MjA2MDA0NTY4M30.J3bYl36RNzNrqFmUq8x1vaww_f_Jegd35dL2ScqKvyk"
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# Replace `print(...)` with this:
+async def log_call(method, path, model, status_code):
+    supabase.table("api_calls").insert({
+        "method": method,
+        "path": path,
+        "model": model,
+        "status_code": status_code,
+        "timestamp": "now()"
+    }).execute()
