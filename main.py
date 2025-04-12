@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI, Request
 import httpx
 import json
@@ -13,16 +14,17 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 async def log_call(method, path, model, status_code):
-        print(f"Inserting data: {method}, {path}, {model}, {status_code}")  # Add this line
-    await supabase.table("api_calls").insert({
+    print(f"Inserting data: {method}, {path}, {model}, {status_code}")  # Log insertion attempt
+    
+    res = await supabase.table("api_calls").insert({
         "method": method,
         "path": path,
         "model": model,
         "status_code": status_code,
         "timestamp": datetime.utcnow().isoformat()
     }).execute()
-    print("Insert response:", res)
-
+    
+    print("Insert response:", res)  # Log the response from the insert operation
 
 @app.api_route("/proxy/openai/{path:path}", methods=["POST", "GET", "PUT", "DELETE"])
 async def proxy_openai(request: Request, path: str):
