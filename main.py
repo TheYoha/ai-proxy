@@ -9,7 +9,7 @@ app = FastAPI()
 
 # Supabase setup
 SUPABASE_URL = "https://utcuhckkcgdzwcktvgva.supabase.co"
-SUPABASE_KEY = "your-service-role-key-here"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0Y3VoY2trY2dkendja3R2Z3ZhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDQ2OTY4MywiZXhwIjoyMDYwMDQ1NjgzfQ.KTu3kyUkkX1iGzy1L4HQZVsHxB3MRoBnNUvg-suhb1E"
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 async def log_call(method, path, model, status_code):
