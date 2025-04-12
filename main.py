@@ -50,6 +50,8 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Replace `print(...)` with this:
+await log_call(request.method, path, model, response.status_code)
+
 async def log_call(method, path, model, status_code):
     supabase.table("api_calls").insert({
         "method": method,
